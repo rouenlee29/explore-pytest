@@ -1,4 +1,4 @@
-# taken from https://github.com/okken/talks/blob/master/2020/pycon_2020/code/test_8.py
+# taken from https://github.com/okken/talks/blob/master/2020/pycon_2020/code/test_11.py
 
 # to run these test, run:
 # python -m pytest test/
@@ -15,7 +15,12 @@ many_triangles = [
 ]
 
 
-@pytest.fixture(params=many_triangles)
+def idfn(a_triangle):
+    a, b, c, expected = a_triangle
+    return f"{a}-{b}-{c}-{expected}"
+
+
+@pytest.fixture(params=many_triangles, ids=idfn)
 def a_triangle(request):
     return request.param
 
